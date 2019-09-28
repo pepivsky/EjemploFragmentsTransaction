@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button addA, addB, removeA, removeB, replaceA, replaceB;
+    Button addA, addB, removeA, removeB, replaceA, replaceB, detachA, detachB, atachA, atachB, showA, hideA, showB, hideB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
         replaceA = (Button) findViewById(R.id.ReplaceA);
         replaceB = (Button) findViewById(R.id.ReplaceB);
+
+        detachA = (Button) findViewById(R.id.DetachA);
+        detachB = (Button) findViewById(R.id.DetachB);
+
+        atachA = (Button) findViewById(R.id.AtachA);
+        atachB = (Button) findViewById(R.id.AtachB);
+
+        showA = (Button) findViewById(R.id.ShowA);
+        hideA = (Button) findViewById(R.id.HideA);
+
+        showB = (Button) findViewById(R.id.ShowB);
+        hideB = (Button) findViewById(R.id.HideB);
+
+
+
 
 
 
@@ -77,6 +92,72 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Detach quita el fragment de la interfaz pero la instancia se mantiene
+        detachA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragmentA");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                if(fragmentA!=null){
+                    transaction.detach(fragmentA);
+                    transaction.commit();
+                }
+
+
+            }
+        });
+        //Atach regresa el frgament a la intyerfaz mediante su instancia que sigue existiendo
+        atachA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragmentA");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                //Validar que exista el fragment antes de hacer el atach
+                if (fragmentA!= null){
+                    transaction.attach(fragmentA);
+                    transaction.commit();
+                }
+
+
+            }
+        });
+
+        hideA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragmentA");
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                if (fragmentA!= null){
+                    fragmentTransaction.hide(fragmentA);
+                    fragmentTransaction.commit();
+                }
+
+            }
+        });
+
+        showA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragmentA");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                if (fragmentA!= null){
+                    transaction.show(fragmentA);
+                    transaction.commit();
+                }
+
+            }
+        });
+
+
+
+
+
 
 
         addB.setOnClickListener(new View.OnClickListener() {
@@ -125,5 +206,67 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        detachB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentB fragmentB = (FragmentB) fragmentManager.findFragmentByTag("FragmentB");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                if(fragmentB!=null){
+                    transaction.detach(fragmentB);
+                    transaction.commit();
+                }
+
+            }
+        });
+
+        atachB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentB fragmentB = (FragmentB) fragmentManager.findFragmentByTag("FragmentB");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                if (fragmentB!= null){
+                    transaction.attach(fragmentB);
+                    transaction.commit();
+                }
+
+            }
+        });
+
+        hideB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentB fragmentB = (FragmentB) fragmentManager.findFragmentByTag("FragmentB");
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                if (fragmentB!= null){
+                    fragmentTransaction.hide(fragmentB);
+                    fragmentTransaction.commit();
+                }
+
+            }
+        });
+
+        showB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentB fragmentB = (FragmentB) fragmentManager.findFragmentByTag("FragmentB");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                if (fragmentB!= null){
+                    transaction.show(fragmentB);
+                    transaction.commit();
+                }
+
+            }
+        });
+
     }
+
 }
